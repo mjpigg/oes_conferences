@@ -1,5 +1,5 @@
 alabaster==0.7.10
-conda==4.3.25
+conda==4.3.16
 contextlib2==0.5.5
 fastcache==1.0.2
 flake8==3.5.0
