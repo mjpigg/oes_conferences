@@ -71,8 +71,6 @@ def test_print():
 @app.route('/test/<teacher>')
 def test_page(teacher):
     data='test'
-    for x in get_advisee_times(teacher):
-        data+=x
     return data
 
 
