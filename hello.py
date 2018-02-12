@@ -72,6 +72,9 @@ def test_print():
 @app.route('/test/<teacher>')
 def test_page(teacher):
     data='test'
+    for row in get_advisee_times(teacher):
+        data+=row
+        
     return data
 
 
@@ -126,6 +129,6 @@ def get_teachers():
 
 
     for teacher in sorted(teacher_set):
-         text+="<a href='./"+teacher.split(',')[0]+"'>"+teacher+"<br>"
+         text+='<a href="./'+teacher.split(',')[0]+'">'+teacher+'<br>'
     return text
 
