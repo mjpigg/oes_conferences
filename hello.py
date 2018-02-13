@@ -1,4 +1,6 @@
-from flask import Flask
+from flask import Flask, render_template
+
+
 app = Flask(__name__)
 
 
@@ -17,6 +19,15 @@ def show_schedule(teacher):
         return get_csv(teacher)
     else:
         return "Please select a Teacher from the List Below"
+
+@app.route('/table/<teacher>')
+def get_teacher_table(teacher):
+    if teacher!='':
+        schedule_data= get_schedule(teacher)
+        return render_template("conf_table.html", conf=schedule_data)
+    else:
+        return "Please select a Teacher from the List Below"
+
 
 def get_csv(teacher):
     data = "Teacher Conference Schedule for {}".format(teacher.title())
@@ -62,6 +73,45 @@ def get_csv(teacher):
     #return "i'm in "+teacher
     return data
 
+def get_schedule(teacher):
+    conflicts=get_advisee_times(teacher)
+    conferences=get_conferences()
+    day=''
+    the_total=0
+    the_schedule=[]
+    bookings=get_bookings(teacher)
+    note=''
+    time=''
+
+    for row in conferences:
+        note = ''
+        advisor=False
+        if row[6].split(',')[0].split(' ')[0].lower()==teacher.lower():
+            advisor=True
+        #check match
+        match=False
+        for check in row[6:15]:
+            if teacher.lower()==check.split(',')[0].split(' ')[0].lower():
+                match=True
+                continue
+
+        if match:
+            id=row[1]+row[2]
+
+            if day != row[1]:  the_schedule.append(('','','','','')) #new day, so add an extra break
+
+            if bookings.get(id,0)>1: row[1] = '*'*bookings[id]+' '+row[1]
+            #the_schedule.append((row[1]+' '+row[2],row[3],row[5],row[4]))
+            if id in conflicts and not advisor:
+                note=' << CANNOT ATTEND, DUE TO ADVISEE CONFLICT >>'
+            if advisor: note= '<< ADVISEE >> '
+            the_schedule.append((row[1],row[2], row[3], row[5]+' '+row[4],note))
+            the_total+=1
+            day=row[1]
+            time=row[2]
+
+    return the_schedule
+
 
 @app.route('/conf/')
 def test_print():
@@ -74,7 +124,7 @@ def test_page(teacher):
     data='test'
     for row in get_advisee_times(teacher):
         data+=row
-        
+
     return data
 
 
