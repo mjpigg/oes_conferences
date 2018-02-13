@@ -7,8 +7,9 @@ table {
 }
 
 td, th {
+    white-space:nowrap;
     border: 1px solid transparent; /* No more visible border */
-    height: 30px;
+    height: 26px;
     transition: all 0.3s;  /* Simple transition for hover effect */
 }
 
@@ -19,7 +20,7 @@ th {
 
 td {
     background: #FAFAFA;
-    text-align: center;
+    text-align: left;
 }
 
 /* Cells in even rows (2,4,6...) are one color */

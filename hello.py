@@ -13,20 +13,35 @@ def show_user_profile(username):
     # show the user profile for that user
     return 'User %s' % username
 
+'''
 @app.route('/conf/<teacher>')
 def show_schedule(teacher):
     if teacher!='':
         return get_csv(teacher)
     else:
         return "Please select a Teacher from the List Below"
+'''
 
-@app.route('/table/<teacher>')
+@app.route('/conf/<teacher>')
 def get_teacher_table(teacher):
     if teacher!='':
-        schedule_data= get_schedule(teacher)
-        return render_template("conf_table.html", conf=schedule_data)
+        schedule_data,the_total= get_schedule(teacher)
+        return render_template("conf_table.html", conf=schedule_data, the_total=the_total,teacher=teacher)
     else:
         return "Please select a Teacher from the List Below"
+
+@app.route('/conf/')
+def test_print():
+    data= "Please Select a teacher from the list below<br>"
+    data+=get_teachers()
+    return data
+
+@app.route('/test/<teacher>')
+def test_page(teacher):
+    data='test'
+    for row in get_advisee_times(teacher):
+        data+=row
+    return data
 
 
 def get_csv(teacher):
@@ -85,6 +100,7 @@ def get_schedule(teacher):
 
     for row in conferences:
         note = ''
+        tag=''
         advisor=False
         if row[6].split(',')[0].split(' ')[0].lower()==teacher.lower():
             advisor=True
@@ -100,32 +116,19 @@ def get_schedule(teacher):
 
             if day != row[1]:  the_schedule.append(('','','','','')) #new day, so add an extra break
 
-            if bookings.get(id,0)>1: row[1] = '*'*bookings[id]+' '+row[1]
+            if bookings.get(id,0)>1: tag='*'*bookings[id]
             #the_schedule.append((row[1]+' '+row[2],row[3],row[5],row[4]))
             if id in conflicts and not advisor:
                 note=' << CANNOT ATTEND, DUE TO ADVISEE CONFLICT >>'
             if advisor: note= '<< ADVISEE >> '
-            the_schedule.append((row[1],row[2], row[3], row[5]+' '+row[4],note))
+            the_schedule.append((tag+' '+row[1],row[2], row[3], row[5]+' '+row[4],note))
             the_total+=1
             day=row[1]
             time=row[2]
 
-    return the_schedule
+    return the_schedule,the_total
 
 
-@app.route('/conf/')
-def test_print():
-    data= "Please Select a teacher from the list below<br>"
-    data+=get_teachers()
-    return data
-
-@app.route('/test/<teacher>')
-def test_page(teacher):
-    data='test'
-    for row in get_advisee_times(teacher):
-        data+=row
-
-    return data
 
 
 

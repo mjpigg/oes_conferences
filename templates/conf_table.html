@@ -1,8 +1,9 @@
 <html>
     <head>
-        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style2.css') }}">
+        <link rel=stylesheet type=text/css href="/static/style2.css?v=.6">
     </head>
     <body>
+    <h3>Conference Schedule for {{teacher}}</h3>
     <table>
         <tr>
                 <th align="left">Date</th>
@@ -13,7 +14,7 @@
         </tr>
           {% for i in conf %}
                 <tr>
-                        <td>{{ i[0] }}</td>
+                        <td nowrap>{{ i[0] }}</td>
                         <td>{{ i[1] }}</td>
                         <td>{{ i[2] }}</td>
                         <td>{{ i[3] }}</td>
@@ -21,4 +22,6 @@
                 </tr>
         {% endfor %}
 </table>
+<BR>{{ the_total }} Conferences
+<BR><BR>** Double Booked Conference<BR><BR>
     </body>
