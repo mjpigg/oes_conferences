@@ -12,16 +12,16 @@ DNA = {
 import scheduler
 import random
 import sqlite3
+import datetime
 
-
-def make_times(sort=True):
-    l=[]
+def make_times(sort = True):
+    conf_times = []
     the_times = scheduler.create_empty_schedule()
     for x in range(5):
         for i in the_times:
-            l.append(i)
+            conf_times.append(i)
     if sort:
-        return sorted(l)
+        return sorted(conf_times)
 
 def get_ids():
     con = sqlite3.connect("conf.db")
@@ -35,7 +35,6 @@ def get_ids():
         ids.append(id[0])
     return ids
 
-
 def create_dna(ids):
     sessions = make_times()
     dna = {}
@@ -43,29 +42,78 @@ def create_dna(ids):
         dna[id] = sessions.pop(random.randrange(len(sessions)))
     return dna
 
-ids = get_ids()
+def conftime_to_preftime(conf_time):
+    days = {2: 'Wed ', 3: 'Thu ', 4: 'Fri '}
+    c = datetime.datetime.strptime(conf_time, "%Y-%m-%d %H:%M:%S")
+    pref_time = days[c.weekday()]
+    if c.hour < 11:
+        pref_time += 'AM'
+    elif c.hour < 14:
+        pref_time += 'Mid'
+    else:
+        pref_time += 'PM'
+    return pref_time
 
+
+#c = datetime.datetime.strptime('2018-02-28 07:30:00',"%Y-%m-%d %H:%M:%S")
+#print(c.weekday(),c.hour)
 # print(len(make_times()))
-# print(create_dna(ids))
+sample = create_dna(get_ids())
+print(conftime_to_preftime(sample[20483]))
+
+def get_prefs():
+    '''
+    This function will return a dictionary of the preferences for each student ID
+    for now it's generating random
+    :rtype: object
+    :return:
+    '''
+    prefs={}
+    con = sqlite3.connect("conf.db")
+    cur = con.cursor()
+    cur.execute("SELECT * from prefs;")
+    rows = cur.fetchall()
+    con.commit()
+    con.close()
+    for ID in rows:
+        prefs[ID[0]]=(ID[1].encode('ascii'), ID[2].encode('ascii'), ID[3].encode('ascii'))
+    return(prefs)
 
 
 
 def fitness(dna):
     '''
     This function takes in a DNA and returns a normalized fitness score
-
     Things to consider for fitness:
-        5 sessions per time block
-        student got 1, 2, or 3 preference
-        siblings are back to back
-        advisor conflicts are minimized
-        triple bookings are minimized
-
-    :param DNA:
+        student got pref1 +5
+        student got pref2 +3
+        student got pref3 +2
+        4 or 5 sessions +1
+        empty last conf +2
+        all three grades per slot +5
+        siblings are back to back + 10
+        advisor conflict -1 for each one
+        triple bookings -1 for each one
+    :param dna :
     :return:
     '''
-    pass
+    score=0
 
+    # check prefs
+    prefs = get_prefs()
+    for key, value in dna.items():
+        pass
+
+
+    return random.randint(0,50)
+
+def create_population(n):
+    pop = []
+    ids = get_ids()
+    for i in range(n):
+        dna = create_dna(ids)
+        pop.append([0,dna])
+    return pop
 
 
 def crossover(dna1,dna2):
