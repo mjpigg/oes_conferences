@@ -28,37 +28,8 @@ def create_empty_schedule():
         c = c + delta
     return(sch)
 
-def get_prefs():
-    '''
-    This function will return a dictionary of the preferences for each student ID
-    for now it's generating random
-    :return:
-    '''
-    options=['Wed AM','Wed AM','Wed AM','Wed AM','Wed Mid','Wed Mid','Wed Mid','Wed PM','Thu AM','Thu Mid','Thu PM','Fri AM','Fri Mid','Fri PM']
-    prefs={}
-    con = sqlite3.connect("conf.db")
-    cur = con.cursor()
-    cur.execute("SELECT studentID FROM confs;")
-    rows = cur.fetchall()
-    con.commit()
-    con.close()
-    for ID in rows:
-        p1=random.choice(options)
-        p2 = random.choice(options)
-        p3 = random.choice(options)
-        prefs[ID[0]]=(p1,p2,p3)
-    return(prefs)
 
 
 
-prefs=get_prefs()
-con = sqlite3.connect("conf.db")
-cur = con.cursor()
+#print(get_prefs())
 
-for key,val in prefs.items():
-    sql="INSERT INTO prefs (studentID,pref1,pref2,pref3) VALUES (?,?,?,?)"
-    #print(sql)
-    cur.execute(sql,(key,val[0],val[1],val[2]))
-
-con.commit()
-con.close()
