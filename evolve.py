@@ -187,6 +187,52 @@ def mutate(dna, mutation_rate = .01):
         dna[val[0]], dna[val[1]] = dna[val[1]], dna[val[0]]
     return dna
 
+def pop_max_min(population):
+    top = population[0][0]
+    bottom = top
+    max, min = 0, 0
+    sum = 0
+    for x, y in enumerate(population):
+        sum += y[0]
+        if y[0] > top:
+            top = y[0]
+            max = x
+        if y[0] < bottom:
+            bottom = y[0]
+            min = x
+    avg = sum / len(population)
+    # top = highest fitness score
+    # bottom = lowest fitness score
+    # max = index of dna with highest fitness score
+    return top, bottom, max, min, avg
+
+def pick_parent(population):
+    '''
+    randomly pick a parent based on fitness score: higher the fitness score, more likely to be picked
+    :param population:
+    :return:
+    '''
+    pop_data = pop_max_min(population)
+    min = pop_data[1]
+    max = pop_data[0]
+    x = 0
+    while x < random.randint(min, max-1):
+        tmp = random.choice(population)
+        x = tmp[0]
+    return tmp[1]
+
+
+def make_new_generation(population, pop_size,mutation_rate):
+    # pop_data = pop_max_min(population)
+    # fittest = population[pop_data[2]]
+    next_generation = []
+    for i in range(pop_size):
+        parent1 = pick_parent(population)
+        parent2 = pick_parent(population)
+        new_dna = crossover(parent1, parent2)
+        new_dna = mutate(new_dna, mutation_rate)
+        next_generation.append([fitness(new_dna),new_dna])
+    return next_generation
 
 
 
