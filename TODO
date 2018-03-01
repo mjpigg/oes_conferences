@@ -1,0 +1,44 @@
+Things that need to be added:
+
+Performance testing:
+DONE - avg time to compute generation
+DONE - total execution time for a run
+
+Speed Optimization:
+DONE - only call prefs once
+
+Fitness Score:
+- advissee conflicts to fitness score
+- teacher NOT more than double booked +5
+- sibling proximity to fitness score
+- grade level distribution (1, 2, 2) (1,2,1) (1,1,3)
+
+Turn the whole thing into a class:
+
+Random Seed:
+- introduce random.seed() so results are reproducible
+
+convert
+Save Schedules to a Database
+- store with random seed, generations, mutation rate, performance speed, date produced
+
+
+Load a Schedule
+- function to load a schedule into confs table to see what it looks like
+
+
+Display a Schedule:
+- make web interface for SQLlite confs.db
+-
+
+Evaluate a Schedule:
+- identify advisee conflicts
+- double bookings
+- sibling closeness
+- missed previous conferences
+- number of first preferences met (x out of y)
+- got first or second (x out of y)
+- got any preference (x out of y)
+- did not get one of their preferences (hilighted on display?)
+
+

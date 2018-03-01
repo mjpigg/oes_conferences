@@ -11,7 +11,12 @@ DNA = {
 '''
 import random
 import sqlite3
-import datetime
+import datetime, time
+
+the_random_seed = int(time.time())
+print(the_random_seed)
+
+random.seed(the_random_seed)
 
 def create_empty_schedule():
     '''
@@ -30,7 +35,6 @@ def create_empty_schedule():
         if c>datetime.datetime(2018,3,2,15):
             break
         if the_time in breaks and (c.weekday!=4 and the_time!='14:30'):
-           # print('BREAK')
             c=c+delta
             continue
         if c>datetime.datetime(c.year,c.month,c.day,16,30):
@@ -62,6 +66,31 @@ def get_ids():
     for id in rows:
         ids.append(id[0])
     return ids
+
+def get_teacher_classes():
+    con = sqlite3.connect("conf.db")
+    cur = con.cursor()
+    cur.execute("SELECT teacherlast, studentID from pcr WHERE dept NOT LIKE 'Activity' "
+                "AND dept NOT LIKE 'perf%' GROUP BY teacherlast, studentID;")
+    rows = cur.fetchall()
+    con.commit()
+    con.close()
+    teacher_classes = {}
+    for id in rows:
+        teacher_classes[id[0]] = teacher_classes.get(id[0],[]) + [id[1]]
+    return teacher_classes
+
+def get_student_grades():
+    con = sqlite3.connect("conf.db")
+    cur = con.cursor()
+    cur.execute("SELECT studentID, grade from pcr GROUP BY studentID;")
+    rows = cur.fetchall()
+    con.commit()
+    con.close()
+    student_grades = {}
+    for id in rows:
+        student_grades[id[0]] = id[1]
+    return student_grades
 
 def create_dna(ids):
     sessions = make_times()
@@ -100,8 +129,21 @@ def get_prefs():
         prefs[ID[0]]=(ID[1], ID[2], ID[3])
     return(prefs)
 
+get_the_prefs_just_once = get_prefs()
 
-def fitness(dna):
+teacher_classes = get_teacher_classes()
+sample_dna = create_dna(get_ids())
+
+def get_time_slots(dna):
+    time_slots={}
+    for id, slot in dna.items():
+        time_slots[slot] = []
+    for id, slot in dna.items():
+        time_slots[slot].append(id)
+    return time_slots
+
+
+def fitness(dna, prefs = get_the_prefs_just_once, t_classes = teacher_classes):
     '''
     This function takes in a DNA and returns a normalized fitness score
     Things to consider for fitness:
@@ -118,7 +160,7 @@ def fitness(dna):
     :return:
     '''
     score=0
-    prefs = get_prefs()
+    #prefs = get_prefs()
     for key, value in dna.items():
         if key not in (prefs):
             score += 1 # no prefs, so plus 1
@@ -131,7 +173,17 @@ def fitness(dna):
             score +=3
         elif pref in prefs[key][1]: # got third pref
             score +=2
+
+    # testing for more than double bookings
+    for slot, ids1 in get_time_slots(dna).items():
+        for teacher, ids2 in t_classes.items():
+            bookings = len(set(ids1).intersection(ids2))
+            if bookings > 2:
+                # print(slot, teacher, len(set(ids1).intersection(ids2)))
+                score -= 1
     return score
+
+#print(fitness(sample_dna))
 
 def create_population(n):
     # creates a population with n members, population is a list of lists with each list containing the fitness score
@@ -215,10 +267,13 @@ def pick_parent(population):
     pop_data = pop_max_min(population)
     min = pop_data[1]
     max = pop_data[0]
-    x = 0
-    while x < random.randint(min, max-1):
+    # print(min, max)
+    x = min-1
+    random_number = random.randint(min, max-1)
+    while x < random_number:
         tmp = random.choice(population)
         x = tmp[0]
+    #print(min,max,random_number, x)
     return tmp[1]
 
 
@@ -230,7 +285,7 @@ def make_new_generation(population, pop_size,mutation_rate):
         parent1 = pick_parent(population)
         parent2 = pick_parent(population)
         new_dna = crossover(parent1, parent2)
-        new_dna = mutate(new_dna, mutation_rate)
+        if mutation_rate > 0: new_dna = mutate(new_dna, mutation_rate)
         next_generation.append([fitness(new_dna),new_dna])
     return next_generation
 
