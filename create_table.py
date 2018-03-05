@@ -1,5 +1,5 @@
 import csv, sqlite3
-from scheduler import get_prefs
+#from scheduler import get_prefs
 
 con = sqlite3.connect("conf.db")
 cur = con.cursor()
@@ -20,7 +20,7 @@ with open('pcr.csv','rU') as fin:  # `with` statement available in 2.5+
     to_db = [(i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[8], i[9], i[10], i[11], i[12], i[13], i[14]) for i in data]
 
 # load data from cvs into conf.pcr
-print(to_db)
+#print(to_db)
 cur.executemany("INSERT INTO pcr "
                 "(grade, advisor, lastname, firstname, dept, course, teacherlast, parentemail1, parentemail2, "
                 "studentID, period, parent1first, parent1last, parent2first, parent2last) "
@@ -41,6 +41,10 @@ cur.execute("DROP TABLE IF EXISTS prefs;")
 sql = "CREATE TABLE prefs (studentID INT,pref1,pref2,pref3);"
 cur.execute(sql)
 
+# Create best schedules table
+cur.execute("DROP TABLE IF EXISTS schedules;")
+sql = "CREATE TABLE schedules (scheduleID INTEGER PRIMARY KEY AUTOINCREMENT, score, mutation_rate, population_size, random_seed, date_produced datetime, schedule);"
+cur.execute(sql)
 
 
 # First pass, just add all the studentIDs to confs
@@ -118,8 +122,6 @@ rows = cur.fetchall()
 for i in rows:
     if i[1]!='': parents[i[0]].append(email_format(i[1],i[2],i[3]))
 
-# print(parents[21295])
-
 for key,value in parents.items():
     sql = "UPDATE confs SET parents='{}' WHERE studentID={};".format(' '.join(value),key)
     cur.execute(sql)
@@ -134,24 +136,19 @@ rows = cur.fetchall()
 con.commit()
 
 # Add prefs from Survey Monkey export
-with open('prefs.csv','rU') as fin:
+# with open('prefs.csv','rU') as fin:
+with open('prefs.csv', encoding = "ISO-8859-1") as fin:
     data = csv.reader(fin)  # comma is default delimiter
     next(data, None)  # skip first line
     to_db = [(i[0], i[2], i[3], i[4]) for i in data if i[2]!='']
 
-print(to_db)
+# print(to_db)
 # load data from cvs into conf.pcr
 cur.executemany("INSERT INTO prefs "
                 "(studentID, pref1, pref2, pref3) "
                 "VALUES (?, ?, ?, ?);", to_db)
 
-# create a cvs file of the conf table
-with open('pigg2.csv', 'wb') as f:
-    writer = csv.writer(f)
-    writer.writerow(cols)
-    writer.writerows(rows)
-
-
 con.commit()
+cur.close()
 con.close()
 
