@@ -19,7 +19,8 @@ import numpy as np
 
 the_random_seed = int(time.time())
 #the_random_seed = 1520229865
-the_random_seed = 1520269702
+#the_random_seed = 1520354947 #produces 926 at 73 gens
+#the_random_seed = 1520447496 # 740 at 83, or 843 with gen combination
 random.seed(the_random_seed)
 
 def create_empty_schedule():
@@ -108,6 +109,7 @@ def get_student_grades():
         student_grades[id[0]] = id[1]
     return student_grades
 
+
 def create_dna(ids):
     sessions = make_times() # make this a class variable
     dna = {}
@@ -147,7 +149,6 @@ def get_prefs():
     return(prefs)
 
 get_the_prefs_just_once = get_prefs()
-
 teacher_classes = get_teacher_classes()
 sample_dna = create_dna(get_ids())
 
@@ -177,7 +178,7 @@ def advisee_doubles(dna):
                 #print(overlap[0],slot,advisor,overlap)
     return swap_list
 
-the_sibs = [(20483, 20484), (20421, 20422), (22998, 20746), (21401, 21350), (21254, 22617), (21128, 21129),(21215, 21376)]
+the_sibs = [(20483, 20484), (20421, 20422), (22998, 21845), (21401, 21350), (21254, 22617), (21128, 21129),(21215, 21376)]
 
 def sib_score(dna, sibs = the_sibs):
     # returns a tuple of (score, conflicts, non_adjacents)
@@ -185,7 +186,6 @@ def sib_score(dna, sibs = the_sibs):
     # find the time delta between the conferences
     for pair in sibs:
         time_diff = np.datetime64(dna[pair[0]]) - np.datetime64(dna[pair[1]])
-        #print(dna[pair[0]], dna[pair[1]], abs(time_diff.item().total_seconds()/60))
         time_diff = abs(time_diff.item().total_seconds() / 60)
         if time_diff != 30:
             score -=50
@@ -194,7 +194,6 @@ def sib_score(dna, sibs = the_sibs):
             adjacents +=1
     return score, probs, adjacents
 
-# print(sib_score(sample_dna))
 
 def fitness(dna, prefs = get_the_prefs_just_once, t_classes = teacher_classes):
     '''
@@ -244,7 +243,6 @@ def fitness(dna, prefs = get_the_prefs_just_once, t_classes = teacher_classes):
 
     # -50 for each sibling not back to back
     score += sib_score(dna)[0]
-
     return score
 
 
@@ -300,17 +298,21 @@ def sib_swaps(dna, sibs = the_sibs):
 
     return swaps
 
-# print(sib_swaps(sample_dna))
 
-def mutate_no_prefs(dna):
+def mutate_no_prefs(dna, get_prefs = None):
     no_pref_ids=[]
     prefs = get_the_prefs_just_once
     for key, value in dna.items():
         if key not in get_the_prefs_just_once:
             continue
         pref = conftime_to_preftime(value)
-        if pref not in prefs[key][0]+prefs[key][1]+prefs[key][2]: # got none of their prefs
-            no_pref_ids.append(key)
+        if get_prefs == None:
+            if pref not in prefs[key][0]+prefs[key][1]+prefs[key][2]: # got none of their prefs
+                no_pref_ids.append(key)
+        else: # return just ids of those getting get_prefs preference
+            if pref in prefs[key][get_prefs-1]: #
+                no_pref_ids.append(key)
+
     return no_pref_ids
 
 def swap_ids(dna,swap_list):
@@ -346,6 +348,7 @@ def mutate(dna, mutation_rate = .02):
     # do the mutation swap
     dna = swap_ids(dna, swap_list)
     swap_list = []
+
 
     # more for the swap list: swapping between ids with no preferences yet met
     no_pref_ids = mutate_no_prefs(dna)
@@ -395,7 +398,7 @@ def pop_max_min(population):
     # max = index of dna with highest fitness score
     return top, bottom, max, min, avg
 
-def pick_parent(population):
+def pick_parent(population): #roulette wheel style
     '''
     randomly pick a parent based on fitness score: higher the fitness score, more likely to be picked
     :param population:
@@ -412,8 +415,21 @@ def pick_parent(population):
     #print(min,max,random_number, x)
     return tmp[1]
 
+def pick_parent_tourney(population): # tournament style not as good as my roulette original
+    '''
+    randomly pick a parent based on fitness score: tournament style selection
+    :param population:
+    :return:
+    '''
+    pickA = random.choice(population)
+    pickB = random.choice(population)
+    if pickA[0] > pickB[0]:
+        return pickA[1]
+    else:
+        return pickB[1]
 
-def make_new_generation(population, pop_size,mutation_rate):
+
+def make_new_generation(population, pop_size,mutation_rate, preserve_top = 5):
     # pop_data = pop_max_min(population)
     # fittest = population[pop_data[2]]
     next_generation = []
@@ -423,7 +439,20 @@ def make_new_generation(population, pop_size,mutation_rate):
         new_dna = crossover(parent1, parent2)
         if mutation_rate > 0: new_dna = mutate(new_dna, mutation_rate)
         next_generation.append([fitness(new_dna),new_dna])
+
+    # This section would implement selecting best from BOTH gens to make new gen
+    # Testing seems to indicate this is worse in the long run ... loses diverstity?
+    #double = next_generation + population
+    if preserve_top:
+        population.sort(key= lambda x: x[0], reverse= True)
+        next_generation = population[0:preserve_top] + next_generation[0:-preserve_top]
+        next_generation.sort(key= lambda x: x[0], reverse= True)
+        print([i[0] for i in next_generation[0:20]])
+
+    # end COMBINATION optimization
+
     return next_generation
+
 
 def get_over_books(dna):
     over_bookings = 0
@@ -431,11 +460,9 @@ def get_over_books(dna):
         for teacher, ids2 in teacher_classes.items():
             bookings = len(set(ids1).intersection(ids2))
             if bookings > 2:
-                # print(slot, teacher, len(set(ids1).intersection(ids2)))
                 over_bookings +=1
     return over_bookings
 
-#print(get_over_books(sample_dna))
 
 def evaluate_dna(dna):
     '''
@@ -475,7 +502,6 @@ def evaluate_dna(dna):
     the_data['Overbookings'] = get_over_books(dna)
     the_data['Advisee Double Bookings'] = len(advisee_doubles(dna))
     the_data['Siblings NOT back to Back'] = sib_score(dna)[1]
-
     return the_data
 
 def save_best_schedule(dna, population_size, random_seed, mutation_rate = .07):
@@ -488,19 +514,11 @@ def save_best_schedule(dna, population_size, random_seed, mutation_rate = .07):
     cur.close()
     con.close()
 
-
 def export_confs(style = 'csv'):
-
     con = sqlite3.connect('conf.db')
-    table = sql.read_sql('select * from confs', con)
+    table = sql.read_sql('select * from confs ORDER BY the_date, grade', con)
     table.to_csv('conf_output.csv')
     con.close()
-
-
-
-# export_confs()
-
-
 
 def json_to_dict(dict):
     dna = {}
@@ -508,9 +526,49 @@ def json_to_dict(dict):
         dna[int(key)] = value
     return dna
 
+def get_schedule(scheduleID):
+    # return the DNA of the schedule
+    con = sqlite3.connect('conf.db')
+    cur = con.cursor()
+    sql = 'SELECT schedule FROM schedules WHERE scheduleID={};'.format(scheduleID)
+    cur.execute(sql)
+    rows = cur.fetchall()
+    dna = json_to_dict(rows[0][0])
+    return dna
+
+def load_schedule(scheduleID):
+    con = sqlite3.connect('conf.db')
+    cur = con.cursor()
+    sql = 'SELECT schedule FROM schedules WHERE scheduleID={};'.format(scheduleID)
+    cur.execute(sql)
+    rows = cur.fetchall()
+    dna = json_to_dict(rows[0][0])
+    # sets the time
+    for id, slot in dna.items():
+        sql = "UPDATE confs SET the_date='{}' WHERE studentID={};".format(slot, id)
+        cur.execute(sql)
+    #now set the room
+    rooms = ['Daphne', 'PWS', 'RGS', 'Purdy' 'Athena', 'Poseiden']
+    sql = 'SELECT * FROM confs ORDER BY the_date, grade DESC';
+    cur.execute(sql)
+    conf_time = ''
+    rows = cur.fetchall()
+    for i in rows:
+        if i[2] != conf_time:
+            rooms = ['Daphne', 'PWS', 'RGS', 'Purdy', 'Athena', 'Poseiden']
+            conf_time = i[2]
+        sql = "UPDATE confs SET room='{}' WHERE studentID={};".format(rooms.pop(),i[0])
+        cur.execute(sql)
+
+    con.commit()
+    cur.close()
+    con.close()
 
 
+print(get_schedule(44))
+#load_schedule(44)
+#export_confs()
 
 
-
+#print(len(mutate_no_prefs(sample_dna, 3)))
 #print(evaluate_dna(sample_dna))

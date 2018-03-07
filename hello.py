@@ -3,7 +3,6 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
-
 @app.route("/")
 def index():
     return "Hello, World!!!"
@@ -127,9 +126,6 @@ def get_schedule(teacher):
             time=row[2]
 
     return the_schedule,the_total
-
-
-
 
 
 def get_bookings(teacher):
