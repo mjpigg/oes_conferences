@@ -4,7 +4,7 @@ import sys
 
 population_size = 60
 mutation_rate = .07
-generations =1000
+generations =100
 preserve = 3 # this guarantees that the top X number of DNA will be preserved into the next generation
 
 

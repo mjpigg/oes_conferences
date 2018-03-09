@@ -514,10 +514,10 @@ def save_best_schedule(dna, population_size, random_seed, mutation_rate = .07):
     cur.close()
     con.close()
 
-def export_confs(style = 'csv'):
+def export_confs(score = 0, style = 'csv'):
     con = sqlite3.connect('conf.db')
     table = sql.read_sql('select * from confs ORDER BY the_date, grade', con)
-    table.to_csv('conf_output.csv')
+    table.to_csv('conf_output'+str(score)+'.csv')
     con.close()
 
 def json_to_dict(dict):
@@ -565,9 +565,9 @@ def load_schedule(scheduleID):
     con.close()
 
 
-print(get_schedule(44))
-#load_schedule(44)
-#export_confs()
+#print(get_schedule(44))
+load_schedule(4)
+export_confs(1206)
 
 
 #print(len(mutate_no_prefs(sample_dna, 3)))
