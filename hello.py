@@ -1,7 +1,10 @@
 from flask import Flask, render_template
+import sqlite3
 
 
 app = Flask(__name__)
+
+
 
 @app.route("/")
 def index():
@@ -20,6 +23,24 @@ def show_schedule(teacher):
     else:
         return "Please select a Teacher from the List Below"
 '''
+@app.route('/test/<teacher>')
+def show_confs(teacher = 'all'):
+    con = sqlite3.connect('conf.db')
+    cur = con.cursor()
+    sql = "SELECT *  FROM confs "
+    if teacher != "all":
+        sql+= "WHERE math like '{}' or advisor like '{}' OR english  like '{}' OR hum_hist like '{}' OR language like '{}' OR " \
+              "act_art like '{}' OR music like '{}' OR pe like '{}' OR science LIKE '{}' ".format(teacher, teacher, teacher,teacher, teacher,teacher, teacher,teacher, teacher)
+    sql += " ORDER BY the_date, grade;"
+    cur.execute(sql)
+    rows = cur.fetchall()
+    confs = []
+    for i in rows:
+        confs.append(i)
+    cur.close()
+    con.close()
+    return render_template("full_conf.html", conf=confs, the_total=len(confs),teacher=teacher.upper())
+
 
 @app.route('/conf/<teacher>')
 def get_teacher_table(teacher):

@@ -6,6 +6,8 @@ table {
     collapse; border-spacing: 0;
 }
 
+
+
 td, th {
     white-space:nowrap;
     border: 1px solid transparent; /* No more visible border */
@@ -23,11 +25,16 @@ td {
     text-align: left;
 }
 
+
+
 /* Cells in even rows (2,4,6...) are one color */
 tr:nth-child(even) td { background: #F1F1F1; }
 
 /* Cells in odd rows (1,3,5...) are another (excludes header cells)  */
 tr:nth-child(odd) td { background: #FEFEFE; }
 
-tr td:hover { background: #666; color: #FFF; }
-/* Hover cell effect! */
+tr:hover td {
+          background-color: #ffff99;
+}
+
+

@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <link rel=stylesheet type=text/css href="/static/style2.css?v=.83">
+    </head>
+    <body>
+    <h3>Conference Schedule for {{teacher}}
+        <BR>
+    {{ the_total }} Conferences
+    </h3>
+    <a href="/test/all">Show All Conferences</a>
+    <table>
+        <tr>
+            <th align="left">Student</th>
+            <th align="left">Date / Time</th>
+            <th align="left">Location</th>
+            <th align="left">Advisor</th>
+            <th align="left">English</th>
+            <th align="left">Hum / Hist</th>
+            <th align="left">Language</th>
+            <th align="left">Math</th>
+            <th align="left">Art / Act</th>
+            <th align="left">Music</th>
+            <th align="left">PE</th>
+            <th align="left">Science</th>
+            <th align="left">Parents</th>
+        </tr>
+          {% for i in conf %}
+                <tr>
+                    <td>{{ i[5] }} {{ i[4] }}</td>
+                    <td>{{ i[2] }}</td>
+                    <td>{{ i[3] }}</td>
+                    <td><a href="/test/{{ i[6] }}">{{ i[6] }}</a></td>
+                    <td><a href="/test/{{ i[7] }}">{{ i[7] }}</a></td>
+                    <td><a href="/test/{{ i[8] }}">{{ i[8] }}</a></td>
+                    <td><a href="/test/{{ i[9] }}">{{ i[9] }}</a></td>
+                    <td><a href="/test/{{ i[10] }}">{{ i[10] }}</a></td>
+                    <td><a href="/test/{{ i[11] }}">{{ i[11] }}</a></td>
+                    <td><a href="/test/{{ i[12] }}">{{ i[12] }}</a></td>
+                    <td><a href="/test/{{ i[13] }}">{{ i[13] }}</a></td>
+                    <td><a href="/test/{{ i[14] }}">{{ i[14] }}</a></td>
+                    <td>{{ i[15] }}</td>
+
+                </tr>
+        {% endfor %}
+</table>
+
+<BR><BR>** Double Booked Conference<BR><BR>
+    </body>
+</html>
+
