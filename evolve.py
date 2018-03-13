@@ -18,7 +18,7 @@ import numpy as np
 
 
 the_random_seed = int(time.time())
-#the_random_seed = 1520229865
+#the_random_seed = 1520921898
 #the_random_seed = 1520354947 #produces 926 at 73 gens
 #the_random_seed = 1520447496 # 740 at 83, or 843 with gen combination
 random.seed(the_random_seed)
@@ -39,7 +39,10 @@ def create_empty_schedule():
         the_time = "{}:{}".format(c.hour, c.minute)
         if c>datetime.datetime(2018,3,2,15):
             break
-        if the_time in breaks and (c.weekday!=4 and the_time!='14:30' and the_time!='11:30'):
+        if the_time in breaks and c.weekday() != 4:
+            c=c+delta
+            continue
+        if the_time in ['9:30','12:0','12:30'] and c.weekday() == 4:
             c=c+delta
             continue
         if c>datetime.datetime(c.year,c.month,c.day,16,30):
@@ -51,6 +54,7 @@ def create_empty_schedule():
         c = c + delta
     return(sch)
 
+
 def make_times(sort = True):
     conf_times = []
     the_times = create_empty_schedule()
@@ -59,6 +63,7 @@ def make_times(sort = True):
             conf_times.append(i)
     if sort:
         return sorted(conf_times)
+
 
 def get_ids(): # returns the studentIDs
     con = sqlite3.connect("conf.db")
@@ -322,7 +327,88 @@ def swap_ids(dna,swap_list):
         dna[val[0]], dna[val[1]] = dna[val[1]], dna[val[0]]
     return dna
 
-def mutate(dna, mutation_rate = .02):
+def pref_swapper(dna, gen = 1):
+    '''
+    This is designed to find IDs with mirror image prefswho may benefit by swapping
+
+    :param dna:
+    :return:
+    '''
+    prefs = get_the_prefs_just_once
+    pref1, pref2, pref3, no_pref = 0, 0, 0, 0
+    have_want={}
+    for key, value in dna.items():
+        the_slot = conftime_to_preftime(value)
+        #print(key,value,the_slot)
+        if key not in get_the_prefs_just_once:
+            #no preference at all
+            #print('no prefs', key)
+            have_want[the_slot+':'+'none'] = have_want.get(the_slot+':'+'none',[]) + [key]
+            continue
+
+        if the_slot in prefs[key][0]: # got first pref
+            #print("got first choice")
+            #do nothing for first choice
+            pass
+        elif the_slot in prefs[key][1]: # got second pref
+            #print("Got {} but wanted {}".format(the_slot, prefs[key][0]))
+            new_key = the_slot+':'+prefs[key][0]
+            have_want[new_key] = have_want.get(new_key, []) + [key]
+        elif the_slot in prefs[key][2]: # got third pref
+            # print("Got {} but wanted {}".format(the_slot, prefs[key][1]))
+            new_key = the_slot + ':' + prefs[key][random.randint(0,1)]
+            have_want[new_key] = have_want.get(new_key, []) + [key]
+        else:
+            #print("Got {} but wanted {}".format(the_slot, prefs[key][2]))
+            new_key = the_slot + ':' + prefs[key][random.randint(0,2)]
+            have_want[new_key] = have_want.get(new_key, []) + [key]
+    swaps = []
+    swapped = []
+    chance_of_swap = 1/((1+gen)**.5)
+    # chance_of_swap = .1
+    # print(chance_of_swap)
+    for have, ids in have_want.items():
+        tmp = have.split(':')
+        want = tmp[1] + ':' + tmp[0]
+        if want in have_want:
+            if len(ids) > len(have_want[want]):
+                shorter = len(have_want[want])
+            else:
+                shorter = len(ids)
+            #print(shorter, have, ids, want, have_want[want])
+            for i in range(shorter):
+                if chance_of_swap > random.random():
+                    first = random.choice(ids)
+                    second = random.choice(have_want[want])
+                    if first not in swapped and second not in swapped:
+                        swaps.append((first, second))
+                        swapped.append(first)
+                        swapped.append(second)
+        want = tmp[1] + ':none'
+        if want in have_want:
+            if len(ids) > len(have_want[want]):
+                shorter = len(have_want[want])
+            else:
+                shorter = len(ids)
+            #print(shorter, have, ids, want, have_want[want])
+            for i in range(shorter):
+                if chance_of_swap > random.random():
+                    first = random.choice(ids)
+                    second = random.choice(have_want[want])
+                    if first not in swapped and second not in swapped:
+                        swaps.append((first, second))
+                        swapped.append(first)
+                        swapped.append(second)
+    #print(len(swaps), end = ' ')
+    return swaps
+
+
+
+#print(pref_swapper(sample_dna))
+
+
+
+def mutate(dna, mutation_rate = .02, gen = 1):
     '''
     mutates the DNA
     swaps times with
@@ -330,6 +416,7 @@ def mutate(dna, mutation_rate = .02):
     :param DNA:
     :return:
     '''
+    # print(mutation_rate)
     # first create a list of he IDs sorted by time order
     tmp_list = []
     for key, value in dna.items(): # sorts the dna in time order
@@ -355,6 +442,10 @@ def mutate(dna, mutation_rate = .02):
     for i in range(int(len(no_pref_ids)/2)):
         swap_list.append((random.choice(no_pref_ids), random.choice(no_pref_ids)))
     dna = swap_ids(dna, swap_list)
+
+    #this will swap some people who have mirror image preference
+    swap_list = pref_swapper(dna, gen)
+    dna = swap_ids(dna, swap_list)
     swap_list = []
 
     # still more to swap: these are ids that have advisor double bookings
@@ -375,8 +466,6 @@ def mutate(dna, mutation_rate = .02):
     dna = swap_ids(dna, swap_list)
 
     return dna
-
-mutate(sample_dna)
 
 
 def pop_max_min(population):
@@ -429,7 +518,7 @@ def pick_parent_tourney(population): # tournament style not as good as my roulet
         return pickB[1]
 
 
-def make_new_generation(population, pop_size,mutation_rate, preserve_top = 5):
+def make_new_generation(population, pop_size,mutation_rate, gen = 1, preserve_top = 5):
     # pop_data = pop_max_min(population)
     # fittest = population[pop_data[2]]
     next_generation = []
@@ -437,18 +526,19 @@ def make_new_generation(population, pop_size,mutation_rate, preserve_top = 5):
         parent1 = pick_parent(population)
         parent2 = pick_parent(population)
         new_dna = crossover(parent1, parent2)
-        if mutation_rate > 0: new_dna = mutate(new_dna, mutation_rate)
+        if mutation_rate > 0: new_dna = mutate(new_dna, mutation_rate, gen = gen)
         next_generation.append([fitness(new_dna),new_dna])
 
     # This section would implement selecting best from BOTH gens to make new gen
     # Testing seems to indicate this is worse in the long run ... loses diverstity?
     #double = next_generation + population
+    '''
     if preserve_top:
         population.sort(key= lambda x: x[0], reverse= True)
         next_generation = population[0:preserve_top] + next_generation[0:-preserve_top]
         next_generation.sort(key= lambda x: x[0], reverse= True)
         print([i[0] for i in next_generation[0:20]])
-
+    '''
     # end COMBINATION optimization
 
     return next_generation
@@ -462,6 +552,10 @@ def get_over_books(dna):
             if bookings > 2:
                 over_bookings +=1
     return over_bookings
+
+
+
+
 
 
 def evaluate_dna(dna):
@@ -517,7 +611,7 @@ def save_best_schedule(dna, population_size, random_seed, mutation_rate = .07):
 def export_confs(style = 'csv'):
     con = sqlite3.connect('conf.db')
     table = sql.read_sql('select * from confs ORDER BY the_date, grade', con)
-    table.to_csv('conf_output.csv')
+    table.to_csv('conf_output_1469.csv')
     con.close()
 
 def json_to_dict(dict):
@@ -565,10 +659,9 @@ def load_schedule(scheduleID):
     con.close()
 
 
-print(get_schedule(44))
-#load_schedule(44)
+print(fitness(get_schedule(106)))
+#load_schedule(106)
 #export_confs()
 
-
-#print(len(mutate_no_prefs(sample_dna, 3)))
-#print(evaluate_dna(sample_dna))
+for key,value in evaluate_dna(get_schedule(106)).items():
+    print(key, value)
