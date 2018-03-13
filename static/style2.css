@@ -1,9 +1,9 @@
 table {
     color: #333;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: Arial, sans-serif;
     width: 640px;
     border-collapse:
-    collapse; border-spacing: 0;
+    collapse; border-spacing: 5;
 }
 
 

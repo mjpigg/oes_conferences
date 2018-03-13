@@ -30,7 +30,7 @@ def show_confs(teacher = 'all'):
     sql = "SELECT *  FROM confs "
     if teacher != "all":
         sql+= "WHERE math like '{}' or advisor like '{}' OR english  like '{}' OR hum_hist like '{}' OR language like '{}' OR " \
-              "act_art like '{}' OR music like '{}' OR pe like '{}' OR science LIKE '{}' ".format(teacher, teacher, teacher,teacher, teacher,teacher, teacher,teacher, teacher)
+              "act_art like '{}' OR music like '{}' OR pe like '{}' OR science LIKE '{}' OR room LIKE '{}'".format(teacher, teacher, teacher,teacher, teacher,teacher, teacher,teacher, teacher, teacher)
     sql += " ORDER BY the_date, grade;"
     cur.execute(sql)
     rows = cur.fetchall()
