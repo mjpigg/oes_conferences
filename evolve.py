@@ -18,7 +18,7 @@ import numpy as np
 
 
 the_random_seed = int(time.time())
-#the_random_seed = 1520921898
+#the_random_seed = 1520975814
 #the_random_seed = 1520354947 #produces 926 at 73 gens
 #the_random_seed = 1520447496 # 740 at 83, or 843 with gen combination
 random.seed(the_random_seed)
@@ -233,7 +233,7 @@ def fitness(dna, prefs = get_the_prefs_just_once, t_classes = teacher_classes):
         elif pref in prefs[key][2]: # got third pref
             score += 3
         else: #got NONE of their choices
-            score -= 5
+            score -= 5 #used to be -5
 
     # testing for more than double bookings
     for slot, ids1 in get_time_slots(dna).items():
@@ -342,14 +342,12 @@ def pref_swapper(dna, gen = 1):
         #print(key,value,the_slot)
         if key not in get_the_prefs_just_once:
             #no preference at all
-            #print('no prefs', key)
             have_want[the_slot+':'+'none'] = have_want.get(the_slot+':'+'none',[]) + [key]
             continue
-
-        if the_slot in prefs[key][0]: # got first pref
-            #print("got first choice")
-            #do nothing for first choice
-            pass
+        if the_slot not in prefs[key]:
+            #print("Got {} but wanted {}".format(the_slot, prefs[key][2]))
+            new_key = the_slot + ':' + prefs[key][random.randint(0,2)]
+            have_want[new_key] = have_want.get(new_key, []) + [key]
         elif the_slot in prefs[key][1]: # got second pref
             #print("Got {} but wanted {}".format(the_slot, prefs[key][0]))
             new_key = the_slot+':'+prefs[key][0]
@@ -358,10 +356,12 @@ def pref_swapper(dna, gen = 1):
             # print("Got {} but wanted {}".format(the_slot, prefs[key][1]))
             new_key = the_slot + ':' + prefs[key][random.randint(0,1)]
             have_want[new_key] = have_want.get(new_key, []) + [key]
-        else:
-            #print("Got {} but wanted {}".format(the_slot, prefs[key][2]))
-            new_key = the_slot + ':' + prefs[key][random.randint(0,2)]
-            have_want[new_key] = have_want.get(new_key, []) + [key]
+        '''
+        if the_slot in prefs[key][0]: # got first pref
+            #print("got first choice")
+            #do nothing for first choice
+            pass
+        '''
     swaps = []
     swapped = []
     chance_of_swap = 1/((1+gen)**.5)
@@ -543,7 +543,6 @@ def make_new_generation(population, pop_size,mutation_rate, gen = 1, preserve_to
 
     return next_generation
 
-
 def get_over_books(dna):
     over_bookings = 0
     for slot, ids1 in get_time_slots(dna).items():
@@ -552,10 +551,6 @@ def get_over_books(dna):
             if bookings > 2:
                 over_bookings +=1
     return over_bookings
-
-
-
-
 
 
 def evaluate_dna(dna):
@@ -661,9 +656,9 @@ def load_schedule(scheduleID):
     con.close()
 
 
-#print(fitness(get_schedule(106)))
-#load_schedule(106)
-#export_confs()
+#print(fitness(get_schedule(113)))
+#load_schedule(113)
+#export_confs(1571)
 
-#for key,value in evaluate_dna(get_schedule(106)).items():
+#for key,value in evaluate_dna(get_schedule(113)).items():
 #    print(key, value)
