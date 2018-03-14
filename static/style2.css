@@ -10,9 +10,10 @@ table {
 
 td, th {
     white-space:nowrap;
-    border: 1px solid transparent; /* No more visible border */
+    /* border: 1px solid transparent;  No more visible border */
+    border: 1px solid #DFDFDF;
     height: 26px;
-    transition: all 0.3s;  /* Simple transition for hover effect */
+    transition: all 0.1s;  /* Simple transition for hover effect */
 }
 
 th {
@@ -23,6 +24,7 @@ th {
 td {
     background: #FAFAFA;
     text-align: left;
+    font-size: small;
 }
 
 
@@ -37,4 +39,6 @@ tr:hover td {
           background-color: #ffff99;
 }
 
-
+.absent {
+    background-color:tomato !important;
+}

@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="deb7f15c-b2fa-4ea5-be6c-ab4e3b81015e" name="Default" comment="First commit with PyCharm">
-      <change beforePath="$PROJECT_DIR$/evolve.py" afterPath="$PROJECT_DIR$/evolve.py" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/conf.db" afterPath="$PROJECT_DIR$/conf.db" />
       <change beforePath="$PROJECT_DIR$/scheduler.py" afterPath="$PROJECT_DIR$/scheduler.py" />
+      <change beforePath="$PROJECT_DIR$/static/style2.css" afterPath="$PROJECT_DIR$/static/style2.css" />
+      <change beforePath="$PROJECT_DIR$/templates/full_conf.html" afterPath="$PROJECT_DIR$/templates/full_conf.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -27,18 +30,18 @@
       <file leaf-file-name="hello.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hello.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="341">
-              <caret line="38" column="23" lean-forward="true" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
+            <state relative-caret-position="555">
+              <caret line="38" column="23" lean-forward="false" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="full_conf.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="full_conf.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/full_conf.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="449">
-              <caret line="30" column="57" lean-forward="false" selection-start-line="30" selection-start-column="57" selection-end-line="30" selection-end-column="57" />
+            <state relative-caret-position="45">
+              <caret line="3" column="74" lean-forward="false" selection-start-line="3" selection-start-column="74" selection-end-line="3" selection-end-column="74" />
               <folding />
             </state>
           </provider>
@@ -47,18 +50,18 @@
       <file leaf-file-name="style2.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/style2.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+            <state relative-caret-position="630">
+              <caret line="42" column="39" lean-forward="false" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="39" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="scheduler.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="scheduler.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scheduler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="43" column="0" lean-forward="true" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+            <state relative-caret-position="15">
+              <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -69,8 +72,8 @@
       <file leaf-file-name="evolve.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/evolve.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
-              <caret line="606" column="16" lean-forward="true" selection-start-line="606" selection-start-column="16" selection-end-line="606" selection-end-column="16" />
+            <state relative-caret-position="9015">
+              <caret line="606" column="16" lean-forward="false" selection-start-line="606" selection-start-column="16" selection-end-line="606" selection-end-column="16" />
               <folding>
                 <element signature="e#282#295#0" expanded="true" />
               </folding>
@@ -164,16 +167,16 @@
         <option value="$PROJECT_DIR$/TODO" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.txt" />
         <option value="$PROJECT_DIR$/hello.py" />
+        <option value="$PROJECT_DIR$/evolve.py" />
+        <option value="$PROJECT_DIR$/scheduler.py" />
         <option value="$PROJECT_DIR$/static/style2.css" />
         <option value="$PROJECT_DIR$/templates/full_conf.html" />
-        <option value="$PROJECT_DIR$/scheduler.py" />
-        <option value="$PROJECT_DIR$/evolve.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="301" />
-    <option name="y" value="88" />
+    <option name="y" value="87" />
     <option name="width" value="1631" />
     <option name="height" value="1267" />
   </component>
@@ -192,17 +195,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <expand>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="shrouded-wave-47169" type="cbb8eebc:String" user="shrouded-wave-47169" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -230,6 +222,17 @@
             <path>
               <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
               <item name="Scratches" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="shrouded-wave-47169" type="cbb8eebc:String" user="shrouded-wave-47169" />
             </path>
           </expand>
           <select />
@@ -403,7 +406,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="301" y="88" width="1631" height="1267" extended-state="0" />
+    <frame x="301" y="87" width="1631" height="1267" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -412,7 +415,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27447698" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27447698" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="FAQ Robot" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21459228" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -825,38 +828,21 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="605">
           <caret line="46" column="23" lean-forward="false" selection-start-line="46" selection-start-column="18" selection-end-line="46" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/hello.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="38" column="23" lean-forward="true" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/style2.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/full_conf.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="449">
-          <caret line="30" column="57" lean-forward="false" selection-start-line="30" selection-start-column="57" selection-end-line="30" selection-end-column="57" />
+        <state relative-caret-position="555">
+          <caret line="38" column="23" lean-forward="false" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/evolve.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="606" column="16" lean-forward="true" selection-start-line="606" selection-start-column="16" selection-end-line="606" selection-end-column="16" />
+        <state relative-caret-position="9015">
+          <caret line="606" column="16" lean-forward="false" selection-start-line="606" selection-start-column="16" selection-end-line="606" selection-end-column="16" />
           <folding>
             <element signature="e#282#295#0" expanded="true" />
           </folding>
@@ -865,11 +851,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scheduler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="43" column="0" lean-forward="true" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+        <state relative-caret-position="15">
+          <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/style2.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="42" column="39" lean-forward="false" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/full_conf.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="74" lean-forward="false" selection-start-line="3" selection-start-column="74" selection-end-line="3" selection-end-column="74" />
+          <folding />
         </state>
       </provider>
     </entry>
