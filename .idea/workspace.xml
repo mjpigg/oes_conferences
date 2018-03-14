@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="deb7f15c-b2fa-4ea5-be6c-ab4e3b81015e" name="Default" comment="First commit with PyCharm">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/shrouded-wave-47169.iml" afterPath="$PROJECT_DIR$/.idea/shrouded-wave-47169.iml" />
@@ -17,6 +18,13 @@
       <change beforePath="$PROJECT_DIR$/scheduler.py" afterPath="$PROJECT_DIR$/scheduler.py" />
       <change beforePath="$PROJECT_DIR$/static/style.css" afterPath="" />
       <change beforePath="$PROJECT_DIR$/templates/conf_table.html" afterPath="" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/conf.db" afterPath="$PROJECT_DIR$/conf.db" />
+      <change beforePath="$PROJECT_DIR$/scheduler.py" afterPath="$PROJECT_DIR$/scheduler.py" />
+      <change beforePath="$PROJECT_DIR$/static/style2.css" afterPath="$PROJECT_DIR$/static/style2.css" />
+      <change beforePath="$PROJECT_DIR$/templates/full_conf.html" afterPath="$PROJECT_DIR$/templates/full_conf.html" />
+>>>>>>> 89cdb94201f48246f8699c8764bb9b19641a4b1b
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -32,18 +40,27 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="555">
               <caret line="38" column="23" lean-forward="false" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
+<<<<<<< HEAD
               <folding>
                 <marker date="1520974040238" expanded="true" signature="666:871" ph="&quot;...&quot;" />
               </folding>
+=======
+              <folding />
+>>>>>>> 89cdb94201f48246f8699c8764bb9b19641a4b1b
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="full_conf.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="full_conf.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/full_conf.html">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="450">
               <caret line="30" column="70" lean-forward="false" selection-start-line="30" selection-start-column="70" selection-end-line="30" selection-end-column="70" />
+=======
+            <state relative-caret-position="45">
+              <caret line="3" column="74" lean-forward="false" selection-start-line="3" selection-start-column="74" selection-end-line="3" selection-end-column="74" />
+>>>>>>> 89cdb94201f48246f8699c8764bb9b19641a4b1b
               <folding />
             </state>
           </provider>
@@ -52,18 +69,23 @@
       <file leaf-file-name="style2.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/style2.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+            <state relative-caret-position="630">
+              <caret line="42" column="39" lean-forward="false" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="39" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="scheduler.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="scheduler.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scheduler.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="75">
               <caret line="5" column="36" lean-forward="true" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="36" />
+=======
+            <state relative-caret-position="15">
+              <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+>>>>>>> 89cdb94201f48246f8699c8764bb9b19641a4b1b
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -74,8 +96,13 @@
       <file leaf-file-name="evolve.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/evolve.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="2176">
               <caret line="657" column="0" lean-forward="true" selection-start-line="657" selection-start-column="0" selection-end-line="657" selection-end-column="0" />
+=======
+            <state relative-caret-position="9015">
+              <caret line="606" column="16" lean-forward="false" selection-start-line="606" selection-start-column="16" selection-end-line="606" selection-end-column="16" />
+>>>>>>> 89cdb94201f48246f8699c8764bb9b19641a4b1b
               <folding>
                 <element signature="e#282#295#0" expanded="true" />
               </folding>
@@ -149,18 +176,30 @@
         <option value="$PROJECT_DIR$/TODO" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.txt" />
         <option value="$PROJECT_DIR$/hello.py" />
-        <option value="$PROJECT_DIR$/static/style2.css" />
-        <option value="$PROJECT_DIR$/templates/full_conf.html" />
         <option value="$PROJECT_DIR$/evolve.py" />
         <option value="$PROJECT_DIR$/scheduler.py" />
+        <option value="$PROJECT_DIR$/static/style2.css" />
+        <option value="$PROJECT_DIR$/templates/full_conf.html" />
+<<<<<<< HEAD
+        <option value="$PROJECT_DIR$/evolve.py" />
+        <option value="$PROJECT_DIR$/scheduler.py" />
+=======
+>>>>>>> 89cdb94201f48246f8699c8764bb9b19641a4b1b
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
+<<<<<<< HEAD
     <option name="x" value="53" />
     <option name="y" value="31" />
     <option name="width" value="1215" />
     <option name="height" value="832" />
+=======
+    <option name="x" value="301" />
+    <option name="y" value="87" />
+    <option name="width" value="1631" />
+    <option name="height" value="1267" />
+>>>>>>> 89cdb94201f48246f8699c8764bb9b19641a4b1b
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -178,6 +217,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
       <pane id="Scratches">
         <subPane>
           <expand>
@@ -200,6 +240,8 @@
           <select />
         </subPane>
       </pane>
+=======
+>>>>>>> 89cdb94201f48246f8699c8764bb9b19641a4b1b
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -221,6 +263,31 @@
           <select />
         </subPane>
       </pane>
+<<<<<<< HEAD
+=======
+      <pane id="Scratches">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+              <item name="Scratches" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="shrouded-wave-47169" type="cbb8eebc:String" user="shrouded-wave-47169" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+>>>>>>> 89cdb94201f48246f8699c8764bb9b19641a4b1b
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -389,7 +456,11 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
     <frame x="53" y="31" width="1215" height="832" extended-state="0" />
+=======
+    <frame x="301" y="87" width="1631" height="1267" extended-state="0" />
+>>>>>>> 89cdb94201f48246f8699c8764bb9b19641a4b1b
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28806585" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -398,6 +469,16 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
+=======
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27447698" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="FAQ Robot" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21459228" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project Explorer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Job Explorer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+>>>>>>> 89cdb94201f48246f8699c8764bb9b19641a4b1b
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3991632" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -769,16 +850,22 @@
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.txt" />
     <entry file="file://$PROJECT_DIR$/hello.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="555">
           <caret line="38" column="23" lean-forward="false" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
           <folding>
             <marker date="1520974040238" expanded="true" signature="666:871" ph="&quot;...&quot;" />
           </folding>
+=======
+        <state relative-caret-position="605">
+          <caret line="46" column="23" lean-forward="false" selection-start-line="46" selection-start-column="18" selection-end-line="46" selection-end-column="23" />
+>>>>>>> 89cdb94201f48246f8699c8764bb9b19641a4b1b
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/full_conf.html">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="450">
           <caret line="30" column="70" lean-forward="false" selection-start-line="30" selection-start-column="70" selection-end-line="30" selection-end-column="70" />
           <folding />
@@ -789,14 +876,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+=======
+        <state relative-caret-position="555">
+          <caret line="38" column="23" lean-forward="false" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
+>>>>>>> 89cdb94201f48246f8699c8764bb9b19641a4b1b
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/evolve.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="2176">
           <caret line="657" column="0" lean-forward="true" selection-start-line="657" selection-start-column="0" selection-end-line="657" selection-end-column="0" />
+=======
+        <state relative-caret-position="9015">
+          <caret line="606" column="16" lean-forward="false" selection-start-line="606" selection-start-column="16" selection-end-line="606" selection-end-column="16" />
+>>>>>>> 89cdb94201f48246f8699c8764bb9b19641a4b1b
           <folding>
             <element signature="e#282#295#0" expanded="true" />
           </folding>
@@ -805,11 +901,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scheduler.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="75">
           <caret line="5" column="36" lean-forward="true" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="36" />
+=======
+        <state relative-caret-position="15">
+          <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+>>>>>>> 89cdb94201f48246f8699c8764bb9b19641a4b1b
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/style2.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="42" column="39" lean-forward="false" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/full_conf.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="74" lean-forward="false" selection-start-line="3" selection-start-column="74" selection-end-line="3" selection-end-column="74" />
+          <folding />
         </state>
       </provider>
     </entry>
