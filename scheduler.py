@@ -4,7 +4,7 @@ import sys
 
 population_size = 60
 mutation_rate = .3
-generations =500
+generations =1000
 
 
 #not currently using
