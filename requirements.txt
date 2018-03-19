@@ -1,0 +1,12 @@
+conda==4.3.16
+flake8==3.5.0
+Flask==0.12.2
+Flask-Cors==3.0.2
+gunicorn==19.3.0
+jedi==0.10.2
+Jinja2==2.9.6
+matplotlib==2.0.2
+numpy==1.12.1
+SQLAlchemy==1.1.9
+urllib3==1.22
+Werkzeug==0.12.2
