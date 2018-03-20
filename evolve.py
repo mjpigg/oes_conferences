@@ -656,9 +656,9 @@ def load_schedule(scheduleID):
     con.close()
 
 
-#print(fitness(get_schedule(113)))
-#load_schedule(113)
+#print(fitness(get_schedule(132)))
+#load_schedule(132)
 #export_confs(1571)
 
-#for key,value in evaluate_dna(get_schedule(113)).items():
+#for key,value in evaluate_dna(get_schedule(132)).items():
 #    print(key, value)
