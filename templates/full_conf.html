@@ -8,7 +8,7 @@
         <BR>
     {{ the_total }} Conferences
     </h3>
-    <a href="/test/all">Show All Conferences</a>
+    <a href="/ms/all">Show All Conferences</a>
     <table>
         <tr>
             <th align="left">Student</th>
@@ -29,48 +29,48 @@
                 <tr>
                     <td class="name">{{ i[5] }} {{ i[4] }}</td>
                     <td>{{ i[2][5:] }}</td>
-                    <td><a href="/test/{{ i[3] }}">{{ i[3] }}</a></td>
-                    <td><a href="/test/{{ i[6] }}">{{ i[6] }}</a></td>
-                    <td{% if i[7] in adv_times[i[2]] and i[6]!=i[7] %} class="absent"{% endif %}><a href="/test/{{ i[7] }}">{{ i[7] }}</a>
+                    <td><a href="/ms/{{ i[3] }}">{{ i[3] }}</a></td>
+                    <td><a href="/ms/{{ i[6] }}">{{ i[6] }}</a></td>
+                    <td{% if i[7] in adv_times[i[2]] and i[6]!=i[7] %} class="absent"{% endif %}><a href="/ms/{{ i[7] }}">{{ i[7] }}</a>
                         {% if bookings[i[2]].count(i[7])>1 %}
                         {{ '*'*bookings[i[2]].count(i[7]) }}
                         {% endif %}
                     </td>
-                    <td{% if i[8] in adv_times[i[2]] and i[6]!=i[8] %} class="absent"{% endif %}><a href="/test/{{ i[8] }}">{{ i[8] }}</a>
+                    <td{% if i[8] in adv_times[i[2]] and i[6]!=i[8] %} class="absent"{% endif %}><a href="/ms/{{ i[8] }}">{{ i[8] }}</a>
                         {% if bookings[i[2]].count(i[9])>1 %}
                         {{ '*'*bookings[i[2]].count(i[9]) }}
                         {% endif %}
                     </td>
-                    <td{% if i[9] in adv_times[i[2]] and i[6]!=i[9] %} class="absent"{% endif %}><a href="/test/{{ i[9] }}">{{ i[9] }}</a>
+                    <td{% if i[9] in adv_times[i[2]] and i[6]!=i[9] %} class="absent"{% endif %}><a href="/ms/{{ i[9] }}">{{ i[9] }}</a>
                         {% if bookings[i[2]].count(i[9])>1 %}
                         {{ '*'*bookings[i[2]].count(i[9]) }}
                         {% endif %}
                     </td>
-                    <td{% if i[10] in adv_times[i[2]] and i[6]!=i[10] %} class="absent"{% endif %}><a href="/test/{{ i[10] }}">{{ i[10] }}</a>
+                    <td{% if i[10] in adv_times[i[2]] and i[6]!=i[10] %} class="absent"{% endif %}><a href="/ms/{{ i[10] }}">{{ i[10] }}</a>
                         {% if bookings[i[2]].count(i[10])>1 %}
                         {{ '*'*bookings[i[2]].count(i[10]) }}
                         {% endif %}
                     </td>
                     <td{% if i[11] in adv_times[i[2]] and i[6]!=i[11] %} class="absent"{% endif %}>
-                    <a href="/test/{{ i[11] }}">{{ i[11] }}</a>
+                    <a href="/ms/{{ i[11] }}">{{ i[11] }}</a>
                         {% if bookings[i[2]].count(i[11])>1 %}
                         {{ '*'*bookings[i[2]].count(i[11]) }}
                         {% endif %}
                     </td>
                     <td{% if i[12] in adv_times[i[2]] and i[6]!=i[12] %} class="absent"{% endif %}>
-                        <a href="/test/{{ i[12] }}">{{ i[12] }}</a>
+                        <a href="/ms/{{ i[12] }}">{{ i[12] }}</a>
                         {% if bookings[i[2]].count(i[12])>1 %}
                         {{ '*'*bookings[i[2]].count(i[12]) }}
                         {% endif %}
                     </td>
                     <td{% if i[13] in adv_times[i[2]] and i[6]!=i[13] %} class="absent"{% endif %}>
-                        <a href="/test/{{ i[13] }}">{{ i[13] }}</a>
+                        <a href="/ms/{{ i[13] }}">{{ i[13] }}</a>
                         {% if bookings[i[2]].count(i[13])>1 %}
                         {{ '*'*bookings[i[2]].count(i[13]) }}
                         {% endif %}
                     </td>
                     <td{% if i[14] in adv_times[i[2]] and i[6]!=i[14] %} class="absent"{% endif %}>
-                        <a href="/test/{{ i[14] }}">{{ i[14] }}</a>
+                        <a href="/ms/{{ i[14] }}">{{ i[14] }}</a>
                         {% if bookings[i[2]].count(i[14])>1 %}
                         {{ '*'*bookings[i[2]].count(i[14]) }}
                         {% endif %}

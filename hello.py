@@ -23,7 +23,7 @@ def show_schedule(teacher):
     else:
         return "Please select a Teacher from the List Below"
 '''
-@app.route('/test/<teacher>')
+@app.route('/ms/<teacher>')
 def show_confs(teacher = 'all'):
     teacher = teacher.replace("'","''")
     con = sqlite3.connect('conf.db')
