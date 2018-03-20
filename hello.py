@@ -25,8 +25,20 @@ def show_schedule(teacher):
 '''
 @app.route('/test/<teacher>')
 def show_confs(teacher = 'all'):
+    teacher = teacher.replace("'","''")
     con = sqlite3.connect('conf.db')
     cur = con.cursor()
+    sql = "SELECT *  FROM confs ORDER BY the_date, grade"
+    cur.execute(sql)
+    rows = cur.fetchall()
+    adv_times={}
+    bookings = {}
+    for i in rows:
+        adv_times[i[2]]= adv_times.get(i[2],[])+[i[6]]
+        bookings[i[2]] = bookings.get(i[2], []) + [i[7],i[8],i[9],i[10],i[11],i[12],i[13],i[14]]
+
+
+
     sql = "SELECT *  FROM confs "
     if teacher != "all":
         sql+= "WHERE math like '{}' or advisor like '{}' OR english  like '{}' OR hum_hist like '{}' OR language like '{}' OR " \
@@ -35,14 +47,15 @@ def show_confs(teacher = 'all'):
     cur.execute(sql)
     rows = cur.fetchall()
     confs = []
-    adv_times={}
-    bookings = {}
+
+    # todo actually have to fix bookings and adv_times to be for ALL conferences, not just those being displayed
     for i in rows:
-        adv_times[i[2]]= adv_times.get(i[2],[])+[i[6]]
-        bookings[i[2]] = bookings.get(i[2], []) + [i[7],i[8],i[9],i[10],i[11],i[12]]
+        #adv_times[i[2]]= adv_times.get(i[2],[])+[i[6]]
+        #bookings[i[2]] = bookings.get(i[2], []) + [i[7],i[8],i[9],i[10],i[11],i[12]]
         confs.append(i)
     cur.close()
     con.close()
+    teacher = teacher.replace("''", "'")
     # bookings = {'2018-03-01 08:00:00':{'Phelps':'**'}}
     return render_template("full_conf.html", conf=confs, the_total=len(confs),teacher=teacher.upper(),adv_times=adv_times, bookings=bookings)
 

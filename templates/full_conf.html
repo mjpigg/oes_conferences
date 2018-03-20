@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel=stylesheet type=text/css href="/static/style2.css?v=.953">
+        <link rel=stylesheet type=text/css href="/static/style2.css?v=.963">
     </head>
     <body>
     <h3>Conference Schedule for {{teacher}}
@@ -27,7 +27,7 @@
         </tr>
           {% for i in conf %}
                 <tr>
-                    <td>{{ i[5] }} {{ i[4] }}</td>
+                    <td class="name">{{ i[5] }} {{ i[4] }}</td>
                     <td>{{ i[2][5:] }}</td>
                     <td><a href="/test/{{ i[3] }}">{{ i[3] }}</a></td>
                     <td><a href="/test/{{ i[6] }}">{{ i[6] }}</a></td>
@@ -63,16 +63,30 @@
                         {{ '*'*bookings[i[2]].count(i[12]) }}
                         {% endif %}
                     </td>
-                    <td><a href="/test/{{ i[13] }}">{{ i[13] }}</a></td>
-                    <td><a href="/test/{{ i[14] }}">{{ i[14] }}</a></td>
+                    <td{% if i[13] in adv_times[i[2]] and i[6]!=i[13] %} class="absent"{% endif %}>
+                        <a href="/test/{{ i[13] }}">{{ i[13] }}</a>
+                        {% if bookings[i[2]].count(i[13])>1 %}
+                        {{ '*'*bookings[i[2]].count(i[13]) }}
+                        {% endif %}
+                    </td>
+                    <td{% if i[14] in adv_times[i[2]] and i[6]!=i[14] %} class="absent"{% endif %}>
+                        <a href="/test/{{ i[14] }}">{{ i[14] }}</a>
+                        {% if bookings[i[2]].count(i[14])>1 %}
+                        {{ '*'*bookings[i[2]].count(i[14]) }}
+                        {% endif %}
+                    </td>
                     <td>{{ i[15] }}</td>
 
                 </tr>
         {% endfor %}
 </table>
 
-<BR><BR>** Double Booked Conference<BR
-    <BR>*** Triple Booked Conference<BR>
+<div>
+    <br>
+    ** Double Booked  Conference
+    <BR>
+    *** Triple Booked Conference
+</div>
     </body>
 </html>
 

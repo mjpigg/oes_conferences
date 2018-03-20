@@ -1,3 +1,8 @@
+div {
+font-family: Arial, sans-serif;
+font-size: 14px;
+}
+
 table {
     color: #333;
     font-family: Arial, sans-serif;
@@ -27,7 +32,9 @@ td {
     font-size: small;
 }
 
-
+.name {
+    font-weight: bold
+    }
 
 /* Cells in even rows (2,4,6...) are one color */
 tr:nth-child(even) td { background: #F1F1F1; }
