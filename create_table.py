@@ -12,7 +12,7 @@ cur.execute("CREATE TABLE pcr "
 
 # csv_layout=['grade','lastname','firstname','dept','course','teacherlast','parentemail1','parentemail2','studentID', 'period']
 
-# take the data from the PCR dump file and loast it into a list of tuples for loading to database
+# take the data from the PCR dump file and load it into a list of tuples for loading to database
 with open('pcr.csv','rU') as fin:  # `with` statement available in 2.5+
     data = csv.reader(fin)  # comma is default delimiter
     next(data, None)  # skip first line
