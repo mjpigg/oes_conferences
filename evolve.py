@@ -9,6 +9,7 @@ DNA = {
 
 1 DNA strand represents a schedule which is an element of the population
 '''
+
 import random
 import sqlite3
 import datetime, time
@@ -18,7 +19,7 @@ import numpy as np
 
 
 the_random_seed = int(time.time())
-#the_random_seed = 1520975814
+the_random_seed = 1521832527
 #the_random_seed = 1520354947 #produces 926 at 73 gens
 #the_random_seed = 1520447496 # 740 at 83, or 843 with gen combination
 random.seed(the_random_seed)
@@ -209,7 +210,7 @@ def fitness(dna, prefs = get_the_prefs_just_once, t_classes = teacher_classes):
         DONE student got pref3 +3
         DONE student got NONE of their prefs -5
         DONE Teachers OverBooked -10
-        DONE Advisor has more than one advisee per slot -50 per conflice
+        DONE Advisor has more than one advisee per slot -50 per conflict
         not needed? 4 or 5 sessions +1
         not needed? empty last conf +2
         not needed? all three grades per slot +5
@@ -218,7 +219,7 @@ def fitness(dna, prefs = get_the_prefs_just_once, t_classes = teacher_classes):
     :param dna :
     :return:
     '''
-    score=0
+    score = 0
     #prefs = get_prefs()
     for key, value in dna.items():
         if key not in (prefs):
@@ -277,7 +278,7 @@ def crossover(dna1,dna2):
         if x == 0:
             new_dna[id] = dna1[id]
         else:
-            new_dna[id] = dna1[id]
+            new_dna[id] = dna2[id]
     return new_dna
 
 
@@ -329,7 +330,7 @@ def swap_ids(dna,swap_list):
 
 def pref_swapper(dna, gen = 1):
     '''
-    This is designed to find IDs with mirror image prefswho may benefit by swapping
+    This is designed to find IDs with mirror image prefs who may benefit by swapping
 
     :param dna:
     :return:
@@ -646,7 +647,7 @@ def load_schedule(scheduleID):
     rows = cur.fetchall()
     for i in rows:
         if i[2] != conf_time:
-            rooms = ['Daphne', 'PWS', 'RGS', 'Purdy', 'Athena', 'Poseiden']
+            rooms = ['extra2','extra1','Daphne', 'PWS', 'RGS', 'Purdy', 'Athena', 'Poseiden']
             conf_time = i[2]
         sql = "UPDATE confs SET room='{}' WHERE studentID={};".format(rooms.pop(),i[0])
         cur.execute(sql)
@@ -656,9 +657,9 @@ def load_schedule(scheduleID):
     con.close()
 
 
-#print(fitness(get_schedule(132)))
-#load_schedule(132)
+#print(fitness(get_schedule(135)))
+#load_schedule(135)
 #export_confs(1571)
 
-#for key,value in evaluate_dna(get_schedule(132)).items():
+#for key,value in evaluate_dna(get_schedule(135)).items():
 #    print(key, value)
